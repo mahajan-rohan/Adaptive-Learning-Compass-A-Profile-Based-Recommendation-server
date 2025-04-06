@@ -51,6 +51,8 @@ export const getUserData = async (req, res) => {
     console.log({ clerkId });
 
     const user = await User.findOne({ clerkId });
+    
+    console.log({ user });
 
     if (!user) return res.status(404).json({ message: "User not found" });
 
