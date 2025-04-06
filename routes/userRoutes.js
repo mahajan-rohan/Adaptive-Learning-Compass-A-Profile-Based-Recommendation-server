@@ -4,6 +4,7 @@ import {
   getUserData,
   updateSubjectInfo,
   updateUserInfo,
+  deleteSubject,
 } from "../controllers/userController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -13,5 +14,6 @@ router.post("/save", authMiddleware, saveUserData);
 router.get("/:clerkId", authMiddleware, getUserData);
 router.put("/update-subject", authMiddleware, updateSubjectInfo);
 router.put("/update-user", authMiddleware, updateUserInfo);
+router.delete("/delete-subject", authMiddleware, deleteSubject);
 
 export default router;

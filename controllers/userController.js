@@ -33,7 +33,6 @@ export const saveUserData = async (req, res) => {
         certifications,
       });
     } else {
-      // user.semester = semester;
       user.subjects = [...user.subjects, ...subjects];
     }
 
@@ -139,6 +138,41 @@ export const updateUserInfo = async (req, res) => {
     res.status(200).json({ message: "User info updated successfully", user });
   } catch (error) {
     console.error("Error updating user info:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const deleteSubject = async (req, res) => {
+  try {
+    const clerkId = req.auth.userId;
+    const { courseCode } = req.body;
+
+    console.log({ clerkId, courseCode });
+
+    if (!courseCode) {
+      return res.status(400).json({ message: "Course code is required" });
+    }
+
+    let user = await User.findOne({ clerkId });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const subjectIndex = user.subjects.findIndex(
+      (subject) => subject.code === courseCode
+    );
+
+    if (subjectIndex === -1) {
+      return res.status(404).json({ message: "Subject not found" });
+    }
+
+    user.subjects.splice(subjectIndex, 1); // Remove the subject from the array
+
+    await user.save();
+    res.status(200).json({ message: "Subject deleted successfully", user });
+  } catch (error) {
+    console.error("Error deleting subject:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
