@@ -8,6 +8,8 @@ export const saveUserData = async (req, res) => {
       semester,
       type,
       subjects,
+      yearsOfExperience,
+      certifications,
       email,
     } = req.body;
 
@@ -27,6 +29,8 @@ export const saveUserData = async (req, res) => {
         subjects,
         type,
         email,
+        yearsOfExperience,
+        certifications,
       });
     } else {
       user.subjects = [...user.subjects, ...subjects];
@@ -46,7 +50,7 @@ export const getUserData = async (req, res) => {
     console.log({ clerkId });
 
     const user = await User.findOne({ clerkId });
-     
+    
     console.log({ user });
 
     if (!user) return res.status(404).json({ message: "User not found" });

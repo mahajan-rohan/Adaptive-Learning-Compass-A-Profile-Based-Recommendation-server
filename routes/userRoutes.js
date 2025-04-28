@@ -3,8 +3,8 @@ import {
   saveUserData,
   getUserData,
   updateSubjectInfo,
-  updateUserInfo, 
-  deleteSubject, 
+  updateUserInfo,
+  deleteSubject,
 } from "../controllers/userController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
@@ -17,4 +17,3 @@ router.put("/update-user", authMiddleware, updateUserInfo);
 router.delete("/delete-subject", authMiddleware, deleteSubject);
 
 export default router;
-  
