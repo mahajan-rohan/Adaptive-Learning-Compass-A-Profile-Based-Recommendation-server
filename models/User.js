@@ -14,6 +14,12 @@ const courseSchema = new mongoose.Schema({
   attendance: { type: Number },
   projectsBuilt: { type: Number },
   codingContestsAttempted: { type: Number },
+  yearsOfExperience: {
+    type: Number,
+  },
+  certifications: {
+    type: Number,
+  },
 });
 
 const userSchema = new mongoose.Schema(
@@ -35,12 +41,6 @@ const userSchema = new mongoose.Schema(
     semester: { type: String, required: true },
     bio: { type: String },
     subjects: [courseSchema], // Array of courses
-    yearsOfExperience: {
-      type: Number,
-    },
-    certifications: {
-      type: Number,
-    },
   },
   { timestamps: true }
 );
